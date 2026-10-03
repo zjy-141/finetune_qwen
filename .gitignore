@@ -13,12 +13,17 @@ Unsloth*Trainer.py
 # 忽略 models目录
 /models
 
+# 忽略 ora_model 目录
+/ora_model
+
+# 忽略 outputs 目录
+/outputs
+
 # 忽略 log 目录
 /log/
 
 # 忽略 gguf 目录
 /gguf/
-
 
 # 忽略 llama.cpp 目录
 /llama.cpp/
