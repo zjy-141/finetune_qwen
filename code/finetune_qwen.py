@@ -1,11 +1,19 @@
+import os
+
+# 设置 Hugging Face 缓存目录（保持和下载时一致）
+os.environ["HF_HOME"] = r"D:\00_Inbox\huggingface_cache"
+
 from unsloth import FastLanguageModel
 import torch
 from datasets import load_dataset
 from trl import SFTTrainer, SFTConfig
 
-# 1. 加载模型与 Tokenizer
+# 本地模型路径
+MODEL_PATH = r"D:\01_Project\project\2026-project18\models\Qwen3-4B-Instruct-bnb-4bit"
+
+# 1. 从本地加载模型与 Tokenizer
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="unsloth/Qwen3-4B-Instruct-2507-unsloth-bnb-4bit",
+    model_name=MODEL_PATH,
     max_seq_length=2048,
     dtype=None,
     load_in_4bit=True,
@@ -46,7 +54,7 @@ trainer = SFTTrainer(
         per_device_train_batch_size=2,
         gradient_accumulation_steps=4,
         warmup_steps=5,
-        max_steps=60,
+        max_steps=200,
         learning_rate=2e-4,
         fp16=not torch.cuda.is_bf16_supported(),
         bf16=torch.cuda.is_bf16_supported(),

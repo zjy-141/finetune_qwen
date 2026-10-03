@@ -10,6 +10,9 @@ unsloth_compiled_cache/
 *.lock
 Unsloth*Trainer.py
 
+# 忽略 models目录
+/models
+
 # 忽略 log 目录
 /log/
 
