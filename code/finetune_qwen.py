@@ -4,7 +4,7 @@ import argparse
 # ============ 可配置区（直接改这里，或者用命令行参数覆盖） ============
 DEFAULT_HF_CACHE = r"D:\00_Inbox\huggingface_cache"
 DEFAULT_MODEL = r"D:\01_Project\project\2026-project18\models\Qwen3-4B-Instruct-bnb-4bit"
-DEFAULT_DATA = r"D:\01_Project\project\2026-project18\dataset\LCCC-base_test.jsonl"
+DEFAULT_DATA = r"D:\01_Project\project\2026-project18\dataset\LCCC-base_train_clean.jsonl"
 DEFAULT_OUTPUT = r"D:\01_Project\project\2026-project18\outputs"
 DEFAULT_LORA = r"D:\01_Project\project\2026-project18\lora_model"
 # ======================================================================
@@ -15,7 +15,7 @@ parser.add_argument("--model", type=str, default=DEFAULT_MODEL, help="本地模�
 parser.add_argument("--output", type=str, default=DEFAULT_OUTPUT, help="训练输出目录")
 parser.add_argument("--lora", type=str, default=DEFAULT_LORA, help="LoRA 保存目录")
 parser.add_argument("--hf_cache", type=str, default=DEFAULT_HF_CACHE, help="HF 缓存目录")
-parser.add_argument("--max_steps", type=int, default=200, help="训练步数")
+parser.add_argument("--max_steps", type=int, default=2000, help="训练步数")
 parser.add_argument("--batch_size", type=int, default=2, help="批大小")
 parser.add_argument("--grad_accum", type=int, default=4, help="梯度累积步数")
 parser.add_argument("--lr", type=float, default=2e-4, help="学习率")
@@ -73,11 +73,10 @@ print(f"原始数据集加载成功，共 {len(dataset)} 条样本")
 def formatting_prompts_func(examples):
     texts = []
     for messages in examples["conversations"]:
-        text = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=False,
-        )
+        # 手动拼接 ChatML：避免 apply_chat_template 引入工具调用相关标记
+        text = ""
+        for msg in messages:
+            text += f"<|im_start|>{msg['role']}\n{msg['content']}<|im_end|>\n"
         texts.append(text)
     return {"text": texts}
 
