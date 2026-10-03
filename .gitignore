@@ -25,6 +25,9 @@ Unsloth*Trainer.py
 # 忽略 log 目录
 /log/
 
+# 忽略 merged_16bit_model 目录
+/merged_16bit_model
+
 # 忽略 gguf 目录
 /gguf/
 

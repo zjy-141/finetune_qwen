@@ -1,3 +1,4 @@
+# 好像没用到
 import os
 import argparse
 
@@ -44,6 +45,7 @@ model.save_pretrained_gguf(
     args.output,
     tokenizer,
     quantization_method="q4_k_m",
+    save_method="merged_4bit_forced", 
 )
 
 print(f"GGUF 导出完成: {args.output}")
