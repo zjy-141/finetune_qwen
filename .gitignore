@@ -13,8 +13,8 @@ Unsloth*Trainer.py
 # 忽略 models目录
 /models
 
-# 忽略 ora_model 目录
-/ora_model
+# 忽略 lora_model 目录
+/lora_model
 
 # 忽略 outputs 目录
 /outputs
