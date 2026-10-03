@@ -16,6 +16,9 @@ Unsloth*Trainer.py
 # 忽略 lora_model 目录
 /lora_model
 
+# 忽略 gguf_output 目录
+/gguf_output
+
 # 忽略 outputs 目录
 /outputs
 
