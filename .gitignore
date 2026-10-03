@@ -5,8 +5,10 @@
 **/dataset/**/*.jsonl
 **/dataset/**/*.json
 
-# 忽略 minimind-3 目录
-/minimind/minimind-3/
+# 忽略所有 unsloth_compiled_cache 目录
+unsloth_compiled_cache/
+*.lock
+Unsloth*Trainer.py
 
 # 忽略 log 目录
 /log/
