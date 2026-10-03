@@ -1,0 +1,28 @@
+# 忽略 Obsidian 配置目录
+/.obsidian/
+
+# 忽略所有 dataset 目录下的 .jsonl 文件
+**/dataset/**/*.jsonl
+**/dataset/**/*.json
+
+# 忽略 minimind-3 目录
+/minimind/minimind-3/
+
+# 忽略 log 目录
+/log/
+
+# 忽略 gguf 目录
+/gguf/
+
+
+# 忽略 llama.cpp 目录
+/llama.cpp/
+
+# 忽略所有 .gguf 文件
+*.gguf
+
+# 忽略所有模型权重文件
+*.safetensors
+*.bin
+*.pt
+*.pth
