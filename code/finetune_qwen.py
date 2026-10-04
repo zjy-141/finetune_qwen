@@ -15,9 +15,9 @@ parser.add_argument("--model", type=str, default=DEFAULT_MODEL, help="本地模�
 parser.add_argument("--output", type=str, default=DEFAULT_OUTPUT, help="训练输出目录")
 parser.add_argument("--lora", type=str, default=DEFAULT_LORA, help="LoRA 保存目录")
 parser.add_argument("--hf_cache", type=str, default=DEFAULT_HF_CACHE, help="HF 缓存目录")
-parser.add_argument("--max_steps", type=int, default=2000, help="训练步数")
-parser.add_argument("--batch_size", type=int, default=2, help="批大小")
-parser.add_argument("--grad_accum", type=int, default=4, help="梯度累积步数")
+parser.add_argument("--max_steps", type=int, default=20000, help="训练步数")
+parser.add_argument("--batch_size", type=int, default=1, help="批大小")
+parser.add_argument("--grad_accum", type=int, default=8, help="梯度累积步数")
 parser.add_argument("--lr", type=float, default=2e-4, help="学习率")
 args = parser.parse_args()
 
@@ -104,11 +104,13 @@ trainer = SFTTrainer(
         lr_scheduler_type="linear",
         seed=3407,
         output_dir=args.output,
+        save_steps=500,
+        save_total_limit=3,
     ),
 )
 
 # 6. 开始训练
-trainer.train()
+trainer.train(resume_from_checkpoint=True)
 
 # 7. 保存 LoRA 适配器
 model.save_pretrained(args.lora)
